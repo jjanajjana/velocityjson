@@ -1,3 +1,8 @@
 Hello $payload.name
 
 Bikes are $payload.bikes  
+
+#foreach($bike in $payload.bikes)
+   bike=$bike.name models=$bike.models
+#end
+    

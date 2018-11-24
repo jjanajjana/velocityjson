@@ -25,6 +25,11 @@ public class Example {
 		return name;
 	}
 
+	@Override
+	public String toString() {
+		return "Example [name=" + name + ", age=" + age + ", bikes=" + bikes + "]";
+	}
+
 	@JsonProperty("name")
 	public void setName(String name) {
 		this.name = name;

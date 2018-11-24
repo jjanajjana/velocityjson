@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -51,12 +52,26 @@ public class VelocityApplication implements CommandLineRunner {
 	    //props.setProperty("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.NullLogSystem");
 	    velocityEngine.init(props);
 		
+	    // do it with JSON only
 		Template t = velocityEngine.getTemplate("index.vm");
 		VelocityContext context = new VelocityContext();
 		context.put("payload", jsonNode);
 		StringWriter writer = new StringWriter();
 		t.merge(context, writer);
+		System.out.println("Velocity with JSON");
 		System.out.println(writer.toString());
+		
+		// now do it with Java
+		ObjectMapper objectMapperJava = new ObjectMapper();
+		objectMapperJava.configure(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true);
+		Example example = objectMapper.readValue(file, Example.class);
+		System.out.println("Java payload");
+		System.out.println(example);
+		context.put("payload", example);
+		StringWriter writerJava = new StringWriter();
+		t.merge(context, writerJava);
+		System.out.println("Velocity with Java");
+		System.out.println(writerJava.toString());
 		
 	}
 }

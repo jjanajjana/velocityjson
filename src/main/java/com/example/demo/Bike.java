@@ -27,6 +27,11 @@ public class Bike {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "Bike [name=" + name + ", models=" + models + "]";
+	}
+
 	@JsonProperty("models")
 	public List<String> getModels() {
 		return models;

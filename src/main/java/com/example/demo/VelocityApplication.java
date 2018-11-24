@@ -53,7 +53,7 @@ public class VelocityApplication implements CommandLineRunner {
 		
 		Template t = velocityEngine.getTemplate("index.vm");
 		VelocityContext context = new VelocityContext();
-		context.put("name", "Archer");
+		context.put("payload", jsonNode);
 		StringWriter writer = new StringWriter();
 		t.merge(context, writer);
 		System.out.println(writer.toString());

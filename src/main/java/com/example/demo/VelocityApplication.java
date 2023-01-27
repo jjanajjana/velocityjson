@@ -47,31 +47,20 @@ public class VelocityApplication implements CommandLineRunner {
 		
 		VelocityEngine velocityEngine = new VelocityEngine();
 		// @DOC: http://velocity.apache.org/engine/1.7/developer-guide.html#configuring-resource-loaders
-		String path = "C:\\pierre\\workspacepv\\velocity\\src\\main\\resources\\templates\\";
+		String path = "";
 	    props.put("file.resource.loader.path", path);
 	    //props.setProperty("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.NullLogSystem");
 	    velocityEngine.init(props);
 		
 	    // do it with JSON only
-		Template t = velocityEngine.getTemplate("index.vm");
+		Template t = velocityEngine.getTemplate("C:\\Users\\Jerry\\Documents\\GitHub\\velocityjson\\src\\main\\resources\\templates\\index.vm");
 		VelocityContext context = new VelocityContext();
 		context.put("payload", jsonNode);
 		StringWriter writer = new StringWriter();
 		t.merge(context, writer);
 		System.out.println("Velocity with JSON");
 		System.out.println(writer.toString());
-		
-		// now do it with Java
-		ObjectMapper objectMapperJava = new ObjectMapper();
-		objectMapperJava.configure(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true);
-		Example example = objectMapper.readValue(file, Example.class);
-		System.out.println("Java payload");
-		System.out.println(example);
-		context.put("payload", example);
-		StringWriter writerJava = new StringWriter();
-		t.merge(context, writerJava);
-		System.out.println("Velocity with Java");
-		System.out.println(writerJava.toString());
+	
 		
 	}
 }

@@ -1,8 +1,40 @@
-Hello $payload.name
-
-Bikes are $payload.bikes  
-
-#foreach($bike in $payload.bikes)
-   bike=$bike.name models=$bike.models
+ #if ( $!{payload.BatchNumber} == 'mixed' )
+    #set ( $batch_number = 'MIXED' )
+ #else
+    #set ( $batch_number = $!{payload.BatchNumber} )
+ #end
+#if ( $!{payload.PurchaseOrderId} == 'multi_sku' )
+    #set ( $purchase_order_id = 'MULTI_SKU' )
+#else
+    #set ( $purchase_order_id = $!{payload.PurchaseOrderId} )
 #end
-    
+#if ( $!{payload.ManufacturingFacilityId} == 'mixed' )
+    #set ( $manufacturing_facility_id = 'MIXED' )
+#else
+    #set ( $manufacturing_facility_id = $!{payload.ManufacturingFacilityId} )
+#end
+
+^XA^SZ2^MCY~TA0~JSN^LT0^MFN,N^JZY^PW806^PR6,6,6^PMN^JMA^LH0,0^LRN^XZ
+^XA^DFR:SSF0.ZPL
+^BY3,0.0
+^FT0030,0262^BCN,0185,N,N,N,N
+^FD>:$!{payload.LpnId}^FS
+^FT0010,0350^GB0792,0000,0004^FS
+^FT0010,0525^GB0792,0000,0004^FS
+^FT0020,0058^A0N,28,38^FDLPN ID^FS
+^FT0070,0327^A0N,48,65^FD$!{payload.LpnId}^FS
+^FT0030,0492^A0N,20,26^FD Purchase Order $!{payload.PurchaseOrderId}^FS
+^FT0032,0405^A0N,20,26^FD ASN ID $!{payload.AsnId}^FS
+^FT0450,0405^A0N,20,26^FD MFG Date $!{payload.ManufacturingDate}^FS
+^FT0046,0588^A0N,28,38^FD Item Id $!{payload.OrderLine.ItemId}^FS
+^FT0046,0744^A0N,28,38^FD LPN Qty $!{payload.TotalLpnQty}^FS
+^FT0450,0492^A0N,20,26^FD Expiry Date $!{payload.ExpiryDate}^FS
+^FT0030,0451^A0N,20,26^FD Vendor Id $!{payload.VendorId}^FS
+^FT0046,0637^A0N,28,38^FD Item Description $!{payload.ItemDescription}^FS
+^FT0247,0679^A0N,28,38^FD GB Item Desc $!{payload.GBARItemDescritpion}^FS
+^FT0450,0451^A0N,20,26^FD Facility Id $!{payload.OfacilityName}^FS
+^FT0483,1206^ABN,11,7^FD$!{Version}/$!{DeviceType}/LPN_LABEL^FS
+$!{payload.EpcZeb}
+^XZ
+^XA^XFR:SSF0.ZPL^PQ1,0,1,Y^XZ
+^XA^IDR:SSF0.ZPL^XZ

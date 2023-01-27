@@ -1,40 +1,129 @@
- #if ( $!{payload.BatchNumber} == 'mixed' )
-    #set ( $batch_number = 'MIXED' )
- #else
-    #set ( $batch_number = $!{payload.BatchNumber} )
- #end
-#if ( $!{payload.PurchaseOrderId} == 'multi_sku' )
-    #set ( $purchase_order_id = 'MULTI_SKU' )
-#else
-    #set ( $purchase_order_id = $!{payload.PurchaseOrderId} )
-#end
-#if ( $!{payload.ManufacturingFacilityId} == 'mixed' )
-    #set ( $manufacturing_facility_id = 'MIXED' )
-#else
-    #set ( $manufacturing_facility_id = $!{payload.ManufacturingFacilityId} )
-#end
-
 ^XA^SZ2^MCY~TA0~JSN^LT0^MFN,N^JZY^PW806^PR6,6,6^PMN^JMA^LH0,0^LRN^XZ
 ^XA^DFR:SSF0.ZPL
-^BY3,0.0
-^FT0030,0262^BCN,0185,N,N,N,N
-^FD>:$!{payload.LpnId}^FS
-^FT0010,0350^GB0792,0000,0004^FS
-^FT0010,0525^GB0792,0000,0004^FS
-^FT0020,0058^A0N,28,38^FDLPN ID^FS
-^FT0070,0327^A0N,48,65^FD$!{payload.LpnId}^FS
-^FT0030,0492^A0N,20,26^FD Purchase Order $!{payload.PurchaseOrderId}^FS
-^FT0032,0405^A0N,20,26^FD ASN ID $!{payload.AsnId}^FS
-^FT0450,0405^A0N,20,26^FD MFG Date $!{payload.ManufacturingDate}^FS
-^FT0046,0588^A0N,28,38^FD Item Id $!{payload.ItemId}^FS
-^FT0046,0744^A0N,28,38^FD LPN Qty $!{payload.TotalLpnQty}^FS
-^FT0450,0492^A0N,20,26^FD Expiry Date $!{payload.ExpiryDate}^FS
-^FT0030,0451^A0N,20,26^FD Vendor Id $!{payload.VendorId}^FS
-^FT0046,0637^A0N,28,38^FD Item Description $!{payload.ItemDescription}^FS
-^FT0247,0679^A0N,28,38^FD GB Item Desc $!{payload.GBARItemDescritpion}^FS
-^FT0450,0451^A0N,20,26^FD Facility Id $!{payload.OfacilityName}^FS
-^FT0483,1206^ABN,11,7^FD$!{Version}/$!{DeviceType}/LPN_LABEL^FS
-$!{payload.EpcZeb}
+
+^FO8,30^A0N,40,31^FD${DocumentTranslator.getI18NValue('dc01_shipping_label.ship_to_address')}^FS
+^FO8,90^A0N,31,42^FD$!{payload.FFName1}$!{payload.FF_Name2}^FS
+^FO8,110^A0N,31,42^FD$!{payload.FFF_Name_Co}^FS
+^FO8,140^A0N,31,42^FD$!{payload.FFFAddress1}^FS
+^FO8,170^A0N,31,42^FD$!{payload.FFFAddress2}^FS
+^FO8,200^A0N,31,42^FD$!{payload.FFFAddress3}^FS
+
+^FO8,270^A0N,31,42^FD$!{payload.FFCity}^FS
+^FO340,270^A0N,31,42^FD$!{payload.FFState}^FS
+
+^FO550,270^A0N,31,42^FD$!{payload.FFPostalCode}^FS
+
+^FO8,310^A0N,31,42^FD$!{payload.FFPhone}^FS
+^FO8,350^A0N,40,35^FD$!{payload.CrossDockCustPO}^FS
+^FO150,350^A0N,39,30^FD$!{payload.CrossDockPurchaseOrder}^FS
+
+^FO8,90^A0N,31,42^FD$!{payload.FFCity1}^FS
+^FO340,90^A0N,31,42^FD$!{payload.FFState1}^FS
+^FO550,90^A0N,31,42^FD$!{payload.FFPostalCode1}^FS
+^FO8,130^A0N,31,42^FD$!{payload.FFPhone1}^FS
+^FO8,170^A0N,40,35^FD$!{payload.CrossDockCustPO1}^FS
+^FO150,170^A0N,39,30^FD$!{payload.CrossDockPurchaseOrder1}^FS
+
+^FO8,140^A0N,31,42^FD$!{payload.FFCity2}^FS
+^FO340,140^A0N,31,42^FD$!{payload.FFState2}^FS
+^FO550,140^A0N,31,42^FD$!{payload.FFPostalCode2}^FS
+^FO8,180^A0N,31,42^FD$!{payload.FFPhone2}^FS
+^FO8,220^A0N,40,35^FD$!{payload.CrossDockCustPO2}^FS
+^FO150,220^A0N,39,30^FD$!{payload.CrossDockPurchaseOrder2}^FS
+
+^FO8,200^A0N,31,42^FD$!{payload.FFCity3}^FS
+^FO340,200^A0N,31,42^FD$!{payload.FFState3}^FS
+^FO550,200^A0N,31,42^FD$!{payload.FFPostalCode3}^FS
+^FO8,240^A0N,31,42^FD$!{payload.FFPhone3}^FS
+^FO8,280^A0N,40,35^FD$!{payload.CrossDockCustPO3}^FS
+^FO150,280^A0N,39,30^FD$!{payload.CrossDockPurchaseOrder3}^FS
+
+^FO8,220^A0N,31,42^FD$!{payload.FFCity4}^FS
+^FO340,220^A0N,31,42^FD$!{payload.FFState4}^FS
+^FO550,220^A0N,31,42^FD$!{payload.FFPostalCode4}^FS
+^FO8,260^A0N,31,42^FD$!{payload.FFPhone4}^FS
+^FO8,300^A0N,40,35^FD$!{payload.CrossDockCustPO4}^FS
+^FO150,300^A0N,39,30^FD$!{payload.CrossDockPurchaseOrder4}^FS
+
+
+^FO8,430^GB798,0,3^FS
+
+^FO8,450^A0N,39,43^FD${DocumentTranslator.getI18NValue('dc01_shipping_label.ship_from_address')}^FS
+^FO300,450^A0N,39,43^FD${DocumentTranslator.getI18NValue('dc01_shipping_label.Delivery')}^FS
+^FO480,450^A0N,39,43^FD$!{payload.OrderId}^FS
+
+^FO8,520^A0N,24,23^FD$!{payload.OfacilityName}^FS
+^FO8,560^A0N,24,23^FD$!{payload.OAddress1} $!{payload.OAddress2} $!{payload.OAddress3}^FS
+
+^FO8,610^A0N,24,23^FD$!{payload.OCity}^FS
+^FO320,610^A0N,24,23^FD$!{payload.OState}^FS
+
+^FO600,610^A0N,24,23^FD$!{payload.OPostalCode}^FS
+
+^FO0,640^GB806,0,3^FS
+
+^FO8,660^A0N,30,32^FD${DocumentTranslator.getI18NValue('dc01_shipping_label.ship_date')}^FS
+^FO150,660^A0N,30,32^FD$!{payload.CustDeliveryStartDateTime}^FS
+^FO340,660^A0N,30,32^FD${DocumentTranslator.getI18NValue('dc01_shipping_label.operator')}^FS
+^FO550,660^A0N,30,32^FD$!{payload.PackerUserId}^FS
+
+^FO340,700^A0N,30,32^FD${DocumentTranslator.getI18NValue('dc01_shipping_label.dest_loc')}^FS
+^FO500,700^A0N,100,90^FD$!{payload.DestLoc}^FS
+
+^FO8,740^A0N,25,30^FD${DocumentTranslator.getI18NValue('dc01_shipping_label.ship_via')}^FS
+^FO130,740^A0N,25,30^FD$!{payload.Carrier}^FS
+
+^FO0,790^GB806,0,3^FS
+^FO8,815^A0N,30,32^FD${DocumentTranslator.getI18NValue('dc01_shipping_label.final_destination')}^FS
+^FO450,815^A0N,30,32^FD${DocumentTranslator.getI18NValue('dc01_shipping_label.branch_gb_truck')}^FS
+^FO700,815^A0N,30,32^FD$!{payload.BranchGBTruck}^FS
+
+^FO8,848^A0N,25,30^FD$!{payload.DestinationName1}^FS
+^FO8,872^A0N,25,30^FD$!{payload.DestinationName2}^FS
+^FO8,897^A0N,25,30^FD$!{payload.DestinationNameCo}^FS
+^FO8,925^A0N,25,30^FD$!{payload.DestinationAddress1}^FS
+^FO8,950^A0N,25,30^FD$!{payload.DestinationAddress2}^FS
+^FO8,980^A0N,25,30^FD$!{payload.DACity}^FS
+^FO200,980^A0N,25,30^FD$!{payload.DAState}^FS
+^FO350,980^A0N,25,30^FD$!{payload.DACountry}^FS
+^FO550,980^A0N,25,30^FD$!{payload.DAPostalCode}^FS
+
+^FO8,856^A0N,25,30^FD$!{payload.DACity1}^FS
+^FO200,856^A0N,25,30^FD$!{payload.DAState1}^FS
+^FO350,856^A0N,25,30^FD$!{payload.DACountry1}^FS
+^FO550,856^A0N,25,30^FD$!{payload.DAPostalCode1}^FS
+
+^FO8,876^A0N,25,30^FD$!{payload.DACity2}^FS
+^FO200,876^A0N,25,30^FD$!{payload.DAState2}^FS
+^FO350,876^A0N,25,30^FD$!{payload.DACountry2}^FS
+^FO550,876^A0N,25,30^FD$!{payload.DAPostalCode2}^FS
+
+^FO8,905^A0N,25,30^FD$!{payload.DACity3}^FS
+^FO200,905^A0N,25,30^FD$!{payload.DAState3}^FS
+^FO350,905^A0N,25,30^FD$!{payload.DACountry3}^FS
+^FO550,905^A0N,25,30^FD$!{payload.DAPostalCode3}^FS
+
+^FO8,930^A0N,25,30^FD$!{payload.DACity4}^FS
+^FO200,930^A0N,25,30^FD$!{payload.DAState4}^FS
+^FO350,930^A0N,25,30^FD$!{payload.DACountry4}^FS
+^FO550,930^A0N,25,30^FD$!{payload.DAPostalCode4}^FS
+
+^FO8,953^A0N,25,30^FD$!{payload.DACity5}^FS
+^FO200,953^A0N,25,30^FD$!{payload.DAState5}^FS
+^FO350,953^A0N,25,30^FD$!{payload.DACountry5}^FS
+^FO550,953^A0N,25,30^FD$!{payload.DAPostalCode5}^FS
+
+^FO8,1005^GB798,0,3^FS
+
+^BY2,0.0^FT0008,1120^BCN,0100,N,N,N,N^FD>$!{payload.olpnXREF}^FS
+^FO120,1140^A0N,31,42^FD$!{payload.olpnXREF}^FS
+^FO8,1140^A0N,31,42^FD${DocumentTranslator.getI18NValue('dc01_shipping_label.olpn')}^FS
+^FO8,1175^GB806,0,3^FS
+
+
+^FO8,1175^GB806,0,3^FS
+^FO578,1188^A0N,16,14^FD//!{Version}/$!{DeviceType}/SHIPPING LABEL^FS
+
 ^XZ
 ^XA^XFR:SSF0.ZPL^PQ1,0,1,Y^XZ
 ^XA^IDR:SSF0.ZPL^XZ

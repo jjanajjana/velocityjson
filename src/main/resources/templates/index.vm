@@ -2,7 +2,7 @@
 ^XA^DFR:SSF0.ZPL
 
 ^FO8,30^A0N,40,31^FD${DocumentTranslator.getI18NValue('dc01_shipping_label.ship_to_address')}^FS
-^FO8,90^A0N,31,42^FD$!{payload.FFName1}$!{payload.FF_Name2}^FS
+^FO8,90^A0N,31,42^FD$!{payload.FFName1}^FS
 ^FO8,110^A0N,31,42^FD$!{payload.FFF_Name_Co}^FS
 ^FO8,140^A0N,31,42^FD$!{payload.FFFAddress1}^FS
 ^FO8,170^A0N,31,42^FD$!{payload.FFFAddress2}^FS
